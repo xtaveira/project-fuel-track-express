@@ -1,5 +1,5 @@
 <template>
   <main class="min-h-[100svh] bg-white">
-    <RouterView></RouterView>
+    <NuxtPage />
   </main>
 </template>

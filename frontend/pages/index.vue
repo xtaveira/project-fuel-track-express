@@ -9,11 +9,13 @@
           <h3>Vehicles</h3>
         </div>
         <div>
-          <button
-            class="bg-[--primary] py-2 px-3 rounded-full font-bold text-white"
-          >
-            New Vehicle
-          </button>
+          <NuxtLink to="/new-vehicle">
+            <button
+              class="bg-[--primary] py-2 px-3 rounded-full font-bold text-white"
+            >
+              New Vehicle
+            </button>
+          </NuxtLink>
         </div>
       </div>
       <div class="pt-5" v-for="vehicle in vehicles" :key="vehicle.id">
@@ -26,12 +28,13 @@
             <p>Last Refuling: {{ formattedDate(vehicle.updatedAt) }}</p>
           </div>
           <div class="w-[25%] max-w-[200px]">
-            <button
-              @click="changeVehicles"
-              class="bg-white text-black rounded-full w-[100%] p-4 sm:p-9"
-            >
-              <img src="../public/gas-station.png" alt="refuling-icon" />
-            </button>
+            <NuxtLink :vehicle="`${vehicle}`" to="/refuling">
+              <button
+                class="bg-white text-black rounded-full w-[100%] p-4 sm:p-9"
+              >
+                <img src="../public/gas-station.png" alt="refuling-icon" />
+              </button>
+            </NuxtLink>
           </div>
         </div>
       </div>
@@ -42,9 +45,7 @@
 <script setup eng="ts">
 const vehicles = useState("vehicles", () => []);
 const formattedDate = (dateString) => {
-  console.log(dateString);
   const date = new Date(dateString);
-  console.log(date);
   return date.toLocaleString("pt-BR", { day: "2-digit", month: "2-digit" });
 };
 onMounted(async () => {

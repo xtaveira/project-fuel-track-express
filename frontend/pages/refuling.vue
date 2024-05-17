@@ -50,16 +50,20 @@
           />
         </div>
         <div class="flex justify-between pt-5">
-          <button
-            class="bg-[--primary] py-2 px-5 rounded-full font-bold text-white"
-          >
-            Cancel
-          </button>
-          <button
-            class="bg-[--primary] py-2 px-5 rounded-full font-bold text-white"
-          >
-            Finish
-          </button>
+          <NuxtLink to="/">
+            <button
+              class="bg-[--primary] py-2 px-5 rounded-full font-bold text-white"
+            >
+              Cancel
+            </button>
+          </NuxtLink>
+          <NuxtLink to="/">
+            <button
+              class="bg-[--primary] py-2 px-5 rounded-full font-bold text-white"
+            >
+              Finish
+            </button>
+          </NuxtLink>
         </div>
       </div>
     </div>
