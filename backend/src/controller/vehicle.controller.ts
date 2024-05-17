@@ -17,6 +17,7 @@ class VehicleController {
     try {
       const vehicle: vehicleType = {
         name: req.body.name,
+        plate: req.body.plate,
         km: parseFloat(req.body.km),
         kmPerLiter: 0,
       };

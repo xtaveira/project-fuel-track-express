@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 type vehicleType = {
   name: string;
+  plate: string;
   km: number;
   kmPerLiter: number;
 };
@@ -9,6 +10,7 @@ type vehicleType = {
 const Schema = new mongoose.Schema(
   {
     name: String,
+    plate: String,
     km: Number,
     kmPerLiter: Number,
   },
