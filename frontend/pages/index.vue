@@ -28,7 +28,7 @@
             <p>Last Refuling: {{ formattedDate(vehicle.updatedAt) }}</p>
           </div>
           <div class="w-[25%] max-w-[200px]">
-            <NuxtLink :vehicle="`${vehicle}`" to="/refuling">
+            <NuxtLink :vehicle="vehicle" to="/refuling">
               <button
                 class="bg-white text-black rounded-full w-[100%] p-4 sm:p-9"
               >
@@ -43,6 +43,10 @@
 </template>
 
 <script setup eng="ts">
+defineProps({
+  vehicle: any,
+});
+
 const vehicles = useState("vehicles", () => []);
 const formattedDate = (dateString) => {
   const date = new Date(dateString);
