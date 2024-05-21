@@ -16,9 +16,12 @@
       </div>
       <div class="pt-5 flex flex-col gap-1">
         <div class="text-[--primary] flex justify-center items-start flex-col">
-          <div class="flex w-full gap-20">
+          <div class="flex w-full gap-20 items-end">
             <label for="vehiclePlate" class="font-bold">vehiclePlate</label>
-            <p v-if="!formSubmittedSuccessfully.value" class="text-red-500">
+            <p
+              v-if="!formSubmittedSuccessfully"
+              class="text-red-500 text-[0.8rem]"
+            >
               placa incorreta
             </p>
           </div>
@@ -83,9 +86,9 @@
 <script setup lang="ts">
 const route = useRoute();
 const router = useRouter();
-const vehicle = useState();
+const vehicle: Ref<any> = useState();
 const vehicleId = route.query.vehicle;
-const formSubmittedSuccessfully = useState(() => true);
+const formSubmittedSuccessfully: Ref<boolean> = useState(() => true);
 const formData = useState(() => {
   return {
     vehiclePlate: "",
@@ -129,7 +132,7 @@ onMounted(async () => {
     vehicle.value = await response.json();
     formSubmittedSuccessfully.value = true;
   } catch (error) {
-    console.log("Failed to fetch vehicle " + error.message);
+    console.log("Failed to fetch vehicle " + error);
   }
 });
 </script>
