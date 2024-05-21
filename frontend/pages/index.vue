@@ -28,11 +28,13 @@
             <p>Last Refuling: {{ formattedDate(vehicle.updatedAt) }}</p>
           </div>
           <div class="w-[25%] max-w-[200px]">
-            <NuxtLink :vehicle="vehicle" to="/refuling">
+            <NuxtLink
+              :to="{ path: '/refuling', query: { vehicle: vehicle._id } }"
+            >
               <button
                 class="bg-white text-black rounded-full w-[100%] p-4 sm:p-9"
               >
-                <img src="../public/gas-station.png" alt="refuling-icon" />
+                <img src="/gas-station.png" alt="refuling-icon" />
               </button>
             </NuxtLink>
           </div>
@@ -43,10 +45,6 @@
 </template>
 
 <script setup eng="ts">
-defineProps({
-  vehicle: any,
-});
-
 const vehicles = useState("vehicles", () => []);
 const formattedDate = (dateString) => {
   const date = new Date(dateString);
