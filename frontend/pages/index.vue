@@ -6,7 +6,7 @@
     <div class="w-[90%]">
       <div class="flex justify-between items-center">
         <div class="font-bold">
-          <h3>Vehicles</h3>
+          <h3 @click="deleteVehicle">Vehicles</h3>
         </div>
         <div>
           <NuxtLink to="/new-vehicle">
@@ -50,12 +50,16 @@ const formattedDate = (dateString) => {
   const date = new Date(dateString);
   return date.toLocaleString("pt-BR", { day: "2-digit", month: "2-digit" });
 };
+const deleteVehicle = async () => {
+  const vehicleId = prompt("Vehicle id for delete:");
+  await fetch(`http://localhost:3001/deleteVehicle/${vehicleId}`);
+};
+const fetchData = async () => {
+  const response = await fetch("http://localhost:3001/");
+  const data = await response.json();
+  vehicles.value = data;
+};
 onMounted(async () => {
-  const fetchData = async () => {
-    const response = await fetch("http://localhost:3001/");
-    const data = await response.json();
-    vehicles.value = data;
-  };
-  fetchData();
+  await fetchData();
 });
 </script>
