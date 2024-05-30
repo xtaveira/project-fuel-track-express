@@ -16,25 +16,15 @@
       </div>
       <div class="pt-5 flex flex-col gap-1">
         <div class="text-[--primary] flex justify-center items-start flex-col">
-          <div class="flex w-full gap-20 items-end">
-            <label for="vehiclePlate" class="font-bold">vehiclePlate</label>
+          <div class="flex w-full">
+            <label for="newKm" class="font-bold">newKm</label>
             <p
               v-if="!formSubmittedSuccessfully"
-              class="text-red-500 text-[0.8rem]"
+              class="text-red-500 text-[0.8rem] text-end w-full pr-20"
             >
-              placa incorreta
+              campo inválido
             </p>
           </div>
-          <input
-            v-model="formData.vehiclePlate"
-            type="text"
-            id="vehiclePlate"
-            name="vehiclePlate"
-            class="py-1 px-4 border-2 border-[--primary] w-full rounded-full"
-          />
-        </div>
-        <div class="text-[--primary] flex justify-center items-start flex-col">
-          <label for="newKm" class="font-bold">newKm</label>
           <input
             v-model="formData.newKm"
             type="text"
@@ -44,7 +34,15 @@
           />
         </div>
         <div class="text-[--primary] flex justify-center items-start flex-col">
-          <label for="litersRefuled" class="font-bold">litersRefuled</label>
+          <div class="flex w-full">
+            <label for="litersRefuled" class="font-bold">litersRefuled</label>
+            <p
+              v-if="!formSubmittedSuccessfully"
+              class="text-red-500 text-[0.8rem] text-end w-full pr-20"
+            >
+              campo inválido
+            </p>
+          </div>
           <input
             v-model="formData.litersRefuled"
             type="text"
@@ -54,7 +52,15 @@
           />
         </div>
         <div class="text-[--primary] flex justify-center items-start flex-col">
-          <label for="refuelingDate" class="font-bold">refulingDate</label>
+          <div class="flex w-full">
+            <label for="refuelingDate" class="font-bold">refuelingDate</label>
+            <p
+              v-if="!formSubmittedSuccessfully"
+              class="text-red-500 text-[0.8rem] text-end w-full pr-20"
+            >
+              campo inválido
+            </p>
+          </div>
           <input
             v-model="formData.refuelingDate"
             type="text"
@@ -91,7 +97,6 @@ const vehicleId = route.query.vehicle;
 const formSubmittedSuccessfully: Ref<boolean> = useState(() => true);
 const formData = useState(() => {
   return {
-    vehiclePlate: "",
     newKm: "",
     litersRefuled: "",
     refuelingDate: "",
@@ -99,7 +104,6 @@ const formData = useState(() => {
 });
 
 const resetForm = () => {
-  formData.value.vehiclePlate = "";
   formData.value.newKm = "";
   formData.value.litersRefuled = "";
   formData.value.refuelingDate = "";
@@ -108,11 +112,9 @@ const resetForm = () => {
 const handleFinishButtonClick = () => {
   console.log(formData.value);
 
-  if (formData.value.vehiclePlate != vehicle.value.plate) {
+  if (!formData.value.newKm) {
     formSubmittedSuccessfully.value = false;
-    console.log("placa digitada errado");
-    console.log("placa digitada: " + formData.value.vehiclePlate);
-    console.log("placa certa: " + vehicle.value.plate);
+    console.log("veiculo errado");
   } else {
     console.log("veiculo certo");
     formSubmittedSuccessfully.value = true;
@@ -120,8 +122,8 @@ const handleFinishButtonClick = () => {
 
   if (formSubmittedSuccessfully.value) {
     router.push("/");
+    resetForm();
   }
-  resetForm();
 };
 
 onMounted(async () => {
